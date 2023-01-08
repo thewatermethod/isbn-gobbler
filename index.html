@@ -4,16 +4,35 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>ISBN Gobbler</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Seymour+One&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="app">
-      <input type="text" id="code" />
-      <div id="book-title"></div>
-      <div id="book-author"></div>
-      <img id="book-image" />
-      <pre id="book-dewey" />
-    </div>
+
+  <div class="grid">
+    <header>
+      <img src="/src/images/gobbler.png" alt="the actual gobbler, a goblin who eats books" height="320" width="320" />
+      <h1>ISBN Gobbler</h1>
+    </header>
+
+    <main>
+      <p>
+        Enter an ISBN and this app will fetch the book titles and information from the Open Library API. You can use this to covert an ISBN to a Dewey Decimal number if available.
+      </p>
+
+      <form id="form">
+        <label class="sr-only" for="code">ISBN</label>
+        <input placeholder="enter an isbn or press enter" type="text" id="code" name="code" />
+        <input type="submit" value="Check ISBN" />
+      </form>
+
+      <ul id="books"></ul>
+      
+    </main>
+
+  </div> 
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
