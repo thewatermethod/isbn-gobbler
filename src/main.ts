@@ -1,19 +1,19 @@
 import testISBN from '../common/testISBN';
 import './style.css'
 
-const bar = document.querySelector('#code') as HTMLInputElement;
-const title = document.querySelector('#book-title') as HTMLDivElement;
-const image = document.querySelector('#book-image') as HTMLImageElement;
-const author = document.querySelector('#book-author') as HTMLDivElement;
-const dewey = document.querySelector('#book-dewey') as HTMLDivElement;
-
-
+// todo: move to common for sharing between client and server
 interface BookData {
   title: string,
   image: string,
   author: string,
   dewey: string,
 }
+
+const bar = document.querySelector('#code') as HTMLInputElement;
+const title = document.querySelector('#book-title') as HTMLDivElement;
+const image = document.querySelector('#book-image') as HTMLImageElement;
+const author = document.querySelector('#book-author') as HTMLDivElement;
+const dewey = document.querySelector('#book-dewey') as HTMLDivElement;
 
 const fetchBookData = async (isbn: string) : Promise<BookData> => {
 
