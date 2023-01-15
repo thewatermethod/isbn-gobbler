@@ -11,7 +11,6 @@ interface BookData {
 
 const bookTemplate =    `
   <div class="book">
-    <img class="book-image" />
     <h2 class="book-title"></h2>
     <p class="book-author"></p>
     <pre class="book-dewey"></pre>
@@ -47,11 +46,6 @@ const renderBookData = (data: BookData,  isbn: string) => {
   const title = book.querySelector('.book-title') as HTMLHeadingElement;
   if(title){
     title.innerText = data.title;
-  }
-
-  const image = book.querySelector('.book-image') as HTMLImageElement;
-  if(image){
-    image.src = data.image;
   }
 
   const author = book.querySelector('.book-author') as HTMLParagraphElement;
