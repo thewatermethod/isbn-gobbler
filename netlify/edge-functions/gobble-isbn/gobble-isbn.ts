@@ -25,6 +25,7 @@ export default async (request: Request) => {
     author: by_statement || '',
     image: "",
     dewey: dewey_decimal_class || "",
+    isbn: isbn,
     raw,
   };
 

@@ -3,7 +3,7 @@
  * @param {string} isbn 
  * @returns {boolean} whether the isbn contains only digits
  */
-const testISBN = async (isbn: string) =>  {
+const testISBN = (isbn: string): boolean =>  {
     return /^\d+$/.test(isbn);
 };
 
