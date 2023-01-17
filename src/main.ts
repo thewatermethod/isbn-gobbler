@@ -115,6 +115,7 @@ form.addEventListener('submit', async (e: Event) => {
   const exists = data.find((book) => book.isbn === isbn);
   if(!exists) {
     data.push(bookData);
+    localStorage.setItem('data', JSON.stringify(data));
     renderBookData();
   }
 
@@ -125,5 +126,14 @@ form.addEventListener('submit', async (e: Event) => {
 bar.addEventListener('keydown', async (e: KeyboardEvent) => {
   if(e.key === 'Enter') {
     form.submit();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  // check for existing data
+  const existingData = localStorage.getItem('data');
+  if(existingData) {
+    data.push(...JSON.parse(existingData));
+    renderBookData();
   }
 });
