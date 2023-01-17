@@ -24,8 +24,9 @@ export default async (request: Request) => {
     title:  full_title || title,
     author: by_statement || '',
     image: "",
-    dewey: dewey_decimal_class || "",
+    dewey: dewey_decimal_class ? dewey_decimal_class.join(', ') : "",
     isbn: isbn,
+    date: new Date().toISOString(),
     raw,
   };
 

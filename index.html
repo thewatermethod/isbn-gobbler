@@ -35,6 +35,16 @@
         <input type="submit" value="Check ISBN" />
       </form>
 
+      <form id="sort" style="display: none;">
+        <label for="sort">Sort</label>
+        <select id="sort" name="sort">
+          <option value="title">Title</option>
+          <option value="author">Author</option>
+          <option value="ddc">Dewey Decimal</option>
+          <option value="date-added">Date added</option>
+        </select>
+      </form>
+
       <ul id="books" class="books" role="list"></ul>
       
     </main>

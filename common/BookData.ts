@@ -4,6 +4,7 @@ interface BookData {
     author: string,
     dewey: string,
     isbn: string,
+    date: string,
 }
 
 export default BookData;

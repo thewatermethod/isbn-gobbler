@@ -3,6 +3,7 @@ import BookData from '../common/BookData';
 import './style.css'
 
 const data: Array<BookData> = [];
+let sortKey = 'date-added';
 
 const bookTemplate =    `
   <div class="book">
@@ -23,6 +24,25 @@ const bar = document.querySelector('#code') as HTMLInputElement;
 const books = document.querySelector('#books') as HTMLDivElement;
 const messageContainer = document.querySelector('#message') as HTMLDivElement;
 const csvButton = document.querySelector('#export') as HTMLButtonElement;
+const sortSelect = document.querySelector('#sort') as HTMLSelectElement;
+
+const sortData = () => {
+  switch(sortKey) {
+    case 'title':
+      data.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+    case 'author':
+      data.sort((a, b) => a.author.localeCompare(b.author));
+      break;
+    case 'ddc':
+      debugger;
+      data.sort((a, b) => a.dewey.localeCompare(b.dewey));
+      break;
+    case 'date-added':
+      data.sort((a, b) => a.date.localeCompare(b.date));
+      break;
+  }
+}
 
 const fetchBookData = async (isbn: string) : Promise<BookData> => {
   const response = await fetch(`/gobble?isbn=${isbn.trim()}`);
@@ -71,6 +91,13 @@ const renderBookData = () => {
   books.innerHTML = '';
   messageContainer.innerHTML =''; // clear any messages
 
+  // if there's no data, hide the sort select
+  if(!data.length) {
+    sortSelect.style.display = 'none';
+  } else {
+    sortSelect.style.display = 'block';
+  }
+
   data.forEach((book) => {
   // otherwise we can build a quick book template and add it to the list
   const listItem = document.createElement('li');
@@ -106,17 +133,21 @@ form.addEventListener('submit', async (e: Event) => {
   const isbn = bar.value;
 
   if(!testISBN(isbn)) {
-    // todo: show error in UI
+    renderMessage('Please enter a valid ISBN');
     return;
   }
 
   const bookData = await fetchBookData(isbn);
 
   const exists = data.find((book) => book.isbn === isbn);
+
   if(!exists) {
     data.push(bookData);
     localStorage.setItem('data', JSON.stringify(data));
     renderBookData();
+  } else {
+    renderMessage('This book is already in your list!');
+    return;
   }
 
   // clear our form
@@ -129,6 +160,19 @@ bar.addEventListener('keydown', async (e: KeyboardEvent) => {
   }
 });
 
+sortSelect.addEventListener('change', (e: Event) => {
+  const target = e.target as HTMLSelectElement;
+  const selected = target.value;
+  sortKey = selected;
+  localStorage.setItem('sort', selected);
+
+  // sort our data
+  sortData();
+
+  // re-render our data
+  renderBookData();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   // check for existing data
   const existingData = localStorage.getItem('data');
@@ -136,4 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
     data.push(...JSON.parse(existingData));
     renderBookData();
   }
+
+  const existingSort = localStorage.getItem('sort');
+  if(existingSort) {
+    sortSelect.value = existingSort;
+    sortKey = existingSort;
+  }
+
+  sortSelect.querySelector(`option[value="${sortKey}"]`)?.setAttribute('selected', 'selected');
 });
