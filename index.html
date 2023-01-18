@@ -11,7 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Seymour+One&display=swap" rel="stylesheet">
   </head>
   <body>
-
+  <div id="loader">
+    <p>Fetching book data...</p>
+  </div>
   <div class="grid">
     <header>
       <img src="/src/images/gobbler.png" alt="the actual gobbler, a goblin who eats books" height="320" width="320" />
@@ -35,7 +37,7 @@
         <input type="submit" value="Check ISBN" />
       </form>
 
-      <form id="sort" style="display: none;">
+      <form id="sort-form" style="display: none;">
         <label for="sort">Sort</label>
         <select id="sort" name="sort">
           <option value="title">Title</option>

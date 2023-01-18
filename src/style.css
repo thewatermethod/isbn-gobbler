@@ -142,3 +142,21 @@ form [type="submit"]:active {
 .book-remove {
   color: var(--red);
 }
+
+.loading #loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#loader {
+  background: rgba(1, 1, 1, 0.45);
+  display: none;
+  font-size: 3em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+}
